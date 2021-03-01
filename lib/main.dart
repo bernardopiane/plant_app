@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plant_app/constants.dart';
 import 'package:plant_app/pages/HomePage.dart';
 import 'package:plant_app/pages/LoginPage.dart';
 
+final cartListProvider = StateNotifierProvider<CartList>((ref) {
+  return CartList();
+});
+
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

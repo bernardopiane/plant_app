@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plant_app/constants.dart';
+import 'package:plant_app/main.dart';
 import 'package:plant_app/utils.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -176,14 +178,26 @@ class DetailsPage extends StatelessWidget {
                   decoration: BoxDecoration(color: orangeColor, borderRadius: BorderRadius.only(topLeft: Radius.circular(64))),
                   child: Material(
                     color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(64)),
-                      onTap: () {},
-                      child: Center(
-                          child: Text(
-                        "Buy \$60",
-                        style: TextStyle(color: Colors.white, fontSize: 24),
-                      )),
+                    child: Consumer(
+                      builder: (context, ScopedReader watch, _) {
+                        return InkWell(
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(64)),
+                          onTap: () {
+                            context.read(cartListProvider).addItem(Item(
+                                  "Item Teste",
+                                  "Item Teste",
+                                  "Item Teste",
+                                  "Item Teste",
+                                  "Item Teste",
+                                ));
+                          },
+                          child: Center(
+                              child: Text(
+                            "Buy \$60",
+                            style: TextStyle(color: Colors.white, fontSize: 24),
+                          )),
+                        );
+                      },
                     ),
                   ),
                 ),

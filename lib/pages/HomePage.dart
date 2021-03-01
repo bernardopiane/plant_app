@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plant_app/constants.dart';
+import 'package:plant_app/widgets/AddToCartButton.dart';
+import 'package:plant_app/widgets/MyBottomBar.dart';
 
 import 'DetailsPage.dart';
 
@@ -149,25 +152,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.black12, spreadRadius: 1, blurRadius: 1)]),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: Colors.white,
-                    ),
-                    Icon(Icons.favorite, color: inactiveColor),
-                    Icon(Icons.shopping_cart, color: inactiveColor),
-                    Icon(Icons.settings, color: inactiveColor),
-                  ],
-                ),
-              ),
-            ),
+            MyBottomBar(PAGE.HOME),
           ],
         ),
       ),
@@ -225,13 +210,7 @@ class ItemChip extends StatelessWidget {
                   bottom: 8,
                   child: Align(
                     alignment: Alignment.bottomRight,
-                    child: Container(
-                      decoration: BoxDecoration(color: Color(0xffff7e67), borderRadius: BorderRadius.circular(32)),
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                    ),
+                    child: AddToCartButton(height: 24, width: 24),
                   ),
                 ),
               ],
@@ -243,7 +222,7 @@ class ItemChip extends StatelessWidget {
   }
 }
 
-class CategoryItem extends StatelessWidget {
+class CategoryItem extends ConsumerWidget {
   const CategoryItem({
     Key key,
     this.image,
@@ -254,7 +233,7 @@ class CategoryItem extends StatelessWidget {
   final String name;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -303,25 +282,7 @@ class CategoryItem extends StatelessWidget {
                     right: 8,
                     child: Align(
                       alignment: Alignment.topRight,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(64),
-                        child: Container(
-                          height: 32,
-                          width: 32,
-                          color: Color(0xffff7e67),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.add,
-                                size: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      child: AddToCartButton(height: 32, width: 32),
                     ),
                   ),
                 ],
