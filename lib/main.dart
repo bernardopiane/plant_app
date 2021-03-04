@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plant_app/constants.dart';
+import 'package:plant_app/pages/CartPage.dart';
+import 'package:plant_app/pages/DetailsPage.dart';
 import 'package:plant_app/pages/HomePage.dart';
 import 'package:plant_app/pages/LoginPage.dart';
 
 final cartListProvider = StateNotifierProvider<CartList>((ref) {
+  return CartList();
+});
+
+final favListProvider = StateNotifierProvider<CartList>((ref) {
   return CartList();
 });
 
@@ -21,6 +27,8 @@ class MyApp extends StatelessWidget {
       initialRoute: "/login",
       routes: {
         '/login': (context) => LoginPage(),
+        '/cart': (context) => CartPage(),
+        '/details': (context) => DetailsPage(),
         // '/home': (context) => HomePage(),
       },
       title: 'Flutter Demo',

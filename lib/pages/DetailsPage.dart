@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plant_app/constants.dart';
@@ -72,7 +73,7 @@ class DetailsPage extends StatelessWidget {
                                     child: InkWell(
                                         borderRadius: BorderRadius.circular(32),
                                         onTap: () {
-                                          Navigator.pop(context);
+                                          Navigator.popAndPushNamed(context, '/cart');
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -121,16 +122,29 @@ class DetailsPage extends StatelessWidget {
                           child: Material(
                             borderRadius: BorderRadius.circular(8),
                             color: Colors.transparent,
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(8),
-                              onTap: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                  Icons.favorite,
-                                  color: Colors.white,
-                                ),
-                              ),
+                            child: Consumer(
+                              builder: (context, watch, _) {
+                                return InkWell(
+                                  borderRadius: BorderRadius.circular(8),
+                                  onTap: () {
+                                    context.read(favListProvider).addItem(Item(
+                                          "Item Teste",
+                                          "Item Teste",
+                                          "Item Teste",
+                                          "Item Teste",
+                                          "Item Teste",
+                                        ));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      // favList.contains(currentItem) ? Icons.favorite_border : Icons.favorite,
+                                      Icons.favorite,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         )

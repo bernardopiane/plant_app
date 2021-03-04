@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plant_app/constants.dart';
@@ -253,7 +254,7 @@ class CategoryItem extends ConsumerWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DetailsPage()),
+                  CupertinoPageRoute(builder: (context) => DetailsPage()),
                 );
               },
               child: Stack(
@@ -316,6 +317,7 @@ class _CategoriesState extends State<Categories> {
           CategoryItem("Indoor", 2),
           CategoryItem("Office", 3),
           CategoryItem("Garden", 4),
+          //Filtrar os featureds baseados nas tag
         ],
       ),
     );

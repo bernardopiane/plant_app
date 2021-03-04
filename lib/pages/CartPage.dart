@@ -12,12 +12,33 @@ class CartPage extends StatelessWidget {
       body: Column(
         children: [
           Consumer(builder: (context, ScopedReader watch, _) {
-            final item = watch(cartListProvider.state);
-            List<Widget> widgets = new List<Widget>();
-            for (var atual in item) {
-              widgets.add(ListTile(title: Text(atual.title)));
-            }
-            return Expanded(child: ListView(children: widgets));
+            final items = watch(cartListProvider.state);
+
+            return Expanded(
+              child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items.elementAt(index);
+
+                  return Dismissible(
+                    key: Key(item.toString()),
+                    background: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: Icon(Icons.delete),
+                      ),
+                    ),
+                    onDismissed: (direction) {
+                      context.read(cartListProvider).removeIndex(index);
+                    },
+                    child: ListTile(
+                      title: Text(item.title),
+                    ),
+                  );
+                },
+              ),
+            );
           }),
           MyBottomBar(PAGE.CART),
         ],

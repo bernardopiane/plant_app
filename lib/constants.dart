@@ -17,6 +17,7 @@ const Color subTextColor = Color(0xff859896);
 enum PAGE {
   HOME,
   CART,
+  FAV,
 }
 
 class Item {
@@ -42,7 +43,9 @@ class CartList extends StateNotifier<List<Item>> {
   }
 
   void removeIndex(int index) {
-    state.removeAt(index);
+    var temp = state;
+    temp.removeAt(index);
+    state = temp;
   }
 
 // CartList() : super(0);
